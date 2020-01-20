@@ -80,6 +80,7 @@ body {
   transition-property: -webkit-transform;
   transition-property: transform;
   transition-property: transform, -webkit-transform;
+  font-size: 15px;
   padding: 0.5em 0.75em;
   margin-right: 20px;
   font-weight: 800;
@@ -221,7 +222,7 @@ h6 {
 
 .code {
   font-family: 'Raleway';
-  font-size: 20px !important;
+  font-size: 10px !important;
   margin-bottom: 10px;
 }
 /*# sourceMappingURL=styles.css.map */
