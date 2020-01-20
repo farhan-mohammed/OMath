@@ -42,7 +42,7 @@
 			"last 1 safari version"
 		]
 	},
-	"homepage": "http://farhan-mohammed.github.io/SteamNotesWebApp",
+	"homepage": "https://farhan-mohammed.github.io/StemNotesWebApp/",
 	"devDependencies": {
 		"gh-pages": "^2.2.0"
 	}
