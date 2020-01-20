@@ -1,0 +1,12 @@
+{
+	"type": "service_account",
+	"project_id": "ipad-notes-project",
+	"private_key_id": "65dd12bc44d046039852a179630b2e0308fda1b1",
+	"private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDbdPv20GhjxVWj\njeoxfrWb0rycv2esd3ABbyW/CAVNb5X7/27d1JpwzTPaOtSl18R0j9N/C2tsPysM\nM7joiAII7gc0TfVcCqDzE0KkI+fTXB4Aya31QvumRUZbtcI0DpRlkZYgoqGvPgKL\nTwbOt6VR2i1FXxXmjTVDZ8vnbwNu+JICGvDhfgX2z7SrDAd0K8J96Dmebr8nfWIc\n4gUTGHQiolIzEqjTDs3cvT6Al7GiAufNMYafmkGGksABXQQJGHzoUvpWQ7jA49zc\nZAewSVVOIUhv7rfplRYvO39h6vfmHPe5WZrCsRWrNnimqZKUG4VIKJeRoVMX/1yx\n4aE1n8hZAgMBAAECggEAVfVec/Bx0xKKVsPRhY2CCQTkR+lY7F7kCkvE1yyHFyur\n7cbBYDZUP/bAZqxAeq0nEBj92Hdank2nyOHBfaM4WNMTE1Ot1V18aXmT0sMVnN4q\nClj0wGp6M0hTJLzu0oEbcyUxTpslBYUebf6IRhP8tzDkJpX1+BY7VKmlXoNHLwGH\n3TXjQXVCCxxTDXYuKVE2il8Z4hBGleeS+JoKvtELAGJkGQXime4RYBAL4Mz0dpr0\nt4wwM2sfhS1MevVcSL1kZ7jcYXzLNZycnmCjFMrss6JT8SE8hWdrf0FowKiG65F8\naapbMF5YTlgnlgRfOEHdm5prHMtnH/MKJymW3PhOWQKBgQD+HwHndJ2GgpP6sff+\nYHFjZO82cpyZl/Vxd3KSUWMEhiQprE0BozouWYhoiIeQTEGP9fygXdFEQCOW0o0g\nwcyR2jv6lJJUUfvzPIZzv/eCEsHlQF1Gd7i/ikI0mLrPkNorSZ+mUAmKoZVxCfI/\nw+3M63iAhnRyL1TgarYmkfyRowKBgQDdFF2VsDUr2+LeJ/pKJOhEdF3LVQvsGJMe\n5eOTxx22cX8XR4uOQcE+N55tfHj9qCz5wL0wdUBLMvWTpi/uyTl6JxGh+DZNSt3C\nEBDxXnVaYHX9aNb5/CnB+/JpLp4za/mKAa36pMg1AYbNWYpLU87NEhyL2iTrzjd1\nfpnRLU810wKBgHeYKjI+rKAQNgpm1VqPEu3/I6FRQSf73xQ+bdo0mVAYvU4re7ZI\nlmoX0t23W21qpfRVhUYHwSPIt7cUcjy3WEpQFagxYchzKQrpMjGpZ5d8smns57jx\nQS5LqCrOsiRbfIGgzZTc2BC5SPaBAtRFplWpf/Wk0Yqngd93+S+fxujXAoGANLA8\n2YbkNS6zc+StNuxy2pWtIN+E9uCod22sfjSvNSL5eg/YB7BOIMjanhdTMojZJzCz\nJhBboVBkzKqHs+4LH7yd7C8eqe8UyMJRd2TerQpeNGW/Dlb1kMC99ilhFLo//48E\n6r5I5LEXcmtLlUZE/AS7/uyfbf94oizo9bxJq3cCgYEAvVYNQNDM3jsS0ZdgoZdS\nUAm1TdhLbYUEkdoxsAGf/6GYI5yUuy8kXWeO795MbYnNd6xgcIOcAYzSyWa1DH2A\nW9oajZaUyn8UNNQ0uubB2JH+ZWprFDu2nNYnBslUD9s2XYKMPV/wf0oZxXTdtrKG\nzy9ZVM3DGseUlN27tjhenJ0=\n-----END PRIVATE KEY-----\n",
+	"client_email": "martin-388@ipad-notes-project.iam.gserviceaccount.com",
+	"client_id": "116884080815316199909",
+	"auth_uri": "https://accounts.google.com/o/oauth2/auth",
+	"token_uri": "https://oauth2.googleapis.com/token",
+	"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+	"client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/martin-388%40ipad-notes-project.iam.gserviceaccount.com"
+}

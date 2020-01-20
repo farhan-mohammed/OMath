@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/SteamNotesWebApp/static/css/main.c62af47c.chunk.css",
+    "main.js": "/SteamNotesWebApp/static/js/main.ef15d2b2.chunk.js",
+    "main.js.map": "/SteamNotesWebApp/static/js/main.ef15d2b2.chunk.js.map",
+    "runtime-main.js": "/SteamNotesWebApp/static/js/runtime-main.f329054f.js",
+    "runtime-main.js.map": "/SteamNotesWebApp/static/js/runtime-main.f329054f.js.map",
+    "static/css/2.35b9cb9b.chunk.css": "/SteamNotesWebApp/static/css/2.35b9cb9b.chunk.css",
+    "static/js/2.ddf7d9bc.chunk.js": "/SteamNotesWebApp/static/js/2.ddf7d9bc.chunk.js",
+    "static/js/2.ddf7d9bc.chunk.js.map": "/SteamNotesWebApp/static/js/2.ddf7d9bc.chunk.js.map",
+    "index.html": "/SteamNotesWebApp/index.html",
+    "precache-manifest.efbdd85d6f98a9571f79bdd1855dd8f2.js": "/SteamNotesWebApp/precache-manifest.efbdd85d6f98a9571f79bdd1855dd8f2.js",
+    "service-worker.js": "/SteamNotesWebApp/service-worker.js",
+    "static/css/2.35b9cb9b.chunk.css.map": "/SteamNotesWebApp/static/css/2.35b9cb9b.chunk.css.map",
+    "static/css/main.c62af47c.chunk.css.map": "/SteamNotesWebApp/static/css/main.c62af47c.chunk.css.map",
+    "static/js/2.ddf7d9bc.chunk.js.LICENSE": "/SteamNotesWebApp/static/js/2.ddf7d9bc.chunk.js.LICENSE",
+    "static/media/katex.min.css": "/SteamNotesWebApp/static/media/KaTeX_Typewriter-Regular.6cc31ea5.woff2",
+    "static/media/thumb.png": "/SteamNotesWebApp/static/media/thumb.fc9dc0f5.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f329054f.js",
+    "static/css/2.35b9cb9b.chunk.css",
+    "static/js/2.ddf7d9bc.chunk.js",
+    "static/css/main.c62af47c.chunk.css",
+    "static/js/main.ef15d2b2.chunk.js"
+  ]
+}
