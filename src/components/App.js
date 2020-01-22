@@ -16,7 +16,7 @@ var firebaseConfig = {
 	storageBucket: 'ipad-notes-project.appspot.com',
 	messagingSenderId: '739419467489',
 	appId: '1:739419467489:web:94122c376c58a6a29d91a0',
-	measurementId: 'G-1PGCGTDD3P',
+	measurementId: 'G-1PGCGTDD3P'
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -26,34 +26,30 @@ export default class App extends Component {
 		super(props);
 		this.state = { list: [], stored: [], lastAddedDate: '' };
 	}
-	componentDidMount() {
-		db.collection('Documents')
-			.get()
-			.then(snapshot => {
-				snapshot.docs.forEach(doc => {
-					let input = doc.data();
-					let output = [];
-					let stored = [];
-					let lastAddedDate = Date.now();
-					for (const t in input) {
-						console.log('NEw entry');
-						console.log(t);
-						for (var y = 0; y < input[t].length; y++) {
-							if (input[t][y] == `"`) {
-								input[t] = [input[t].slice(0, y), '\\', input[t].slice(y)].join('');
-								y += 1;
-							}
+	loadDoc = () => {
+		db.collection('Documents').get().then((snapshot) => {
+			snapshot.docs.forEach((doc) => {
+				let input = doc.data();
+				let output = [];
+				let stored = [];
+				let lastAddedDate = Date.now();
+				for (const t in input) {
+					for (var y = 0; y < input[t].length; y++) {
+						if (input[t][y] == `"`) {
+							input[t] = [ input[t].slice(0, y), '\\', input[t].slice(y) ].join('');
+							y += 1;
 						}
-						console.log(input[t]);
-						output.push({ ...JSON.parse(input[t].replace(/'/g, `"`)) });
-						stored.push(t);
-						console.log('End of entry');
-
-						lastAddedDate = Date.now();
 					}
-					this.setState({ stored, list: output, lastAddedDate });
-				});
+					output.push({ ...JSON.parse(input[t].replace(/'/g, `"`)), id: t });
+					stored.push(t);
+
+					lastAddedDate = Date.now();
+				}
+				this.setState({ stored, list: output, lastAddedDate });
 			});
+		});
+	};
+	listenerDoc = () => {
 		// db.collection('Documents')
 		// 	.get()
 		// 	.then(snapshot => {
@@ -61,8 +57,8 @@ export default class App extends Component {
 		// 			console.log(`SETUP ${doc.data().toString()}`);
 		// 		});
 		// 	});
-		db.collection('Documents').onSnapshot(snapshot => {
-			snapshot.docChanges().forEach(change => {
+		db.collection('Documents').onSnapshot((snapshot) => {
+			snapshot.docChanges().forEach((change) => {
 				if (change.type === 'modified') {
 					let input = change.doc.data();
 					let listed = this.state.list;
@@ -71,7 +67,7 @@ export default class App extends Component {
 
 					for (const t in input) {
 						if (!storaged.includes(t)) {
-							listed.push({ ...JSON.parse(input[t].replace(/'/g, `"`)) });
+							listed.push({ ...JSON.parse(input[t].replace(/'/g, `"`)), id: t });
 							storaged.push(t);
 							lastAddedDate = Date.now();
 						}
@@ -81,16 +77,20 @@ export default class App extends Component {
 				}
 			});
 		});
+	};
+
+	componentDidMount() {
+		this.loadDoc();
+		this.listenerDoc();
 	}
 	renderList = () =>
-		this.state.list.map(item => {
-			console.log(item);
+		this.state.list.map((item) => {
 			return (
-				<div>
+				<div key={item.id}>
 					{item.id}
-					<br></br>
+					<br />
 					{item.mode}
-					<br></br>
+					<br />
 					{item.payload}
 				</div>
 			);
@@ -104,13 +104,13 @@ export default class App extends Component {
 			<div className="body">
 				<div className="header">
 					<span>
-						<img className="header-logo" src={logo} alt=""></img>S.T.E.M. Notes
+						<img className="header-logo" src={logo} alt="" />S.T.E.M. Notes
 					</span>
 				</div>
 				<div className="page">
-					<RenderItems list={this.state.list}></RenderItems>
+					<RenderItems list={this.state.list} db={db} firebase={firebase} updt={this.loadDoc} />
 				</div>
-				<DashBoard lastAdded={{ date: this.state.lastAddedDate, ...pp, id: idef }}></DashBoard>
+				<DashBoard lastAdded={{ date: this.state.lastAddedDate, ...pp, id: idef }} />
 			</div>
 		);
 	}
