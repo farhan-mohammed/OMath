@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-class WebBucket extends Component {
+
+/**
+ * I used this guide to create a function that uploads images to an S3 AWS bucket
+ * https://medium.com/@khelif96/uploading-files-from-a-react-app-to-aws-s3-the-right-way-541dd6be689
+ * 
+ */
+
+class AWSBucket extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -12,50 +19,50 @@ class WebBucket extends Component {
 	handleChange = (ev) => {
 		this.setState({ success: false, url: '' });
 	};
-	// Perform the upload
+	// Performs the upload to the AWS S3 Server
 	handleUpload = (ev) => {
 		if (this.uploadInput.files[0]) {
 			let file = this.uploadInput.files[0];
 			let fileParts = this.uploadInput.files[0].name.split('.');
-			console.log('Preparing the upload');
+			// console.log('Preparing the upload');
 			axios
+				//Sends the backend server the file name and type to create a signed request
 				.post('https://frozen-reaches-96529.herokuapp.com/omath', {
 					fileName: fileParts[0],
 					fileType: fileParts[1]
 				})
+				// A successful respons means that the item was uplaoded!
 				.then((response) => {
-					console.log(response);
+					// console.log(response);
 					var returnData = response.data.data.returnData;
+					// Stores the signed request
 					var signedRequest = returnData.signedRequest;
+					// the URL of the iamage after its uploaded
 					var url = returnData.url;
+					// Added the server location
 					let tt =
 						url.slice(0, 'https://stemnotes.s3'.length) +
 						'.us-east-2' +
 						url.slice('https://stemnotes.s3'.length);
-					this.setState({ url: tt });
-					console.log('Recieved a signed request ' + signedRequest);
-					console.log(`${tt}.${fileParts[1]}`);
 					// Put the fileType in the headers for the upload
 					var options = {
 						headers: {
 							'Content-Type': fileParts[1]
 						}
 					};
-					// this.props.addFile(`${tt}.${fileParts[1]}`);
+					// This is where we actually upload the file to the server
 					axios
 						.put(signedRequest, file, options)
-						.then((result) => {
-							this.setState({ success: true });
-							console.log(fileParts[1]);
-							console.log(this.props);
+						.then(() => {
+							// Add the URL of the image as a note using the passed in function!
 							this.props.addImage(tt);
 						})
 						.catch((error) => {
-							alert('ERROR ' + JSON.stringify(error));
+							console.log('ERROR ' + JSON.stringify(error));
 						});
 				})
 				.catch((error) => {
-					alert(JSON.stringify(error));
+					console.log(JSON.stringify(error));
 				});
 		}
 	};
@@ -65,7 +72,7 @@ class WebBucket extends Component {
 			<div className="bucket-con">
 				<div className="bucket-title">Choose a file to upload and then press Add to add it to the page!</div>
 				<div className="bucket-input">
-					<div class="ui tiny input">
+					<div className="ui tiny input">
 						<input
 							label={'x'}
 							onChange={this.handleChange}
@@ -75,8 +82,8 @@ class WebBucket extends Component {
 							type="file"
 						/>
 					</div>
-
-					<button className="ui tiny green basic button" onClick={this.handleUpload}>
+					{/**HandleUpload is where all the magic happens */}
+					<button className="ui tiny green button" onClick={this.handleUpload}>
 						Add to Page
 					</button>
 				</div>
@@ -84,4 +91,4 @@ class WebBucket extends Component {
 		);
 	}
 }
-export default WebBucket;
+export default AWSBucket;

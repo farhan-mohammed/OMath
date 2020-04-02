@@ -1,3 +1,6 @@
+/**
+ * This is basically a Canvas Map that is a white background, I should update this with a more efficient drawing or solution in the future.
+ */
 export default {
 	lines: [
 		{

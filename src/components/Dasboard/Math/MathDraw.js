@@ -8,6 +8,7 @@ const colors = [ '#000', '#fff', '#009FD6', '#34CBFF', '#038E3B', '#66CC00', '#E
 
 class CanvasDrawExample extends Component {
 	state = {
+		// The inital properties of the canvas
 		color: colors[0],
 		width: '100%',
 		height: '400px',
@@ -15,16 +16,14 @@ class CanvasDrawExample extends Component {
 		lazyRadius: 0,
 		source: 0
 	};
-	UpdateMath = () => {
-		// console.log(this.state.source);
+	updateMath = () => {
+		// Creates an API call to MathPix API to convert the canvas api to LaTeX
 		MathAPI.post('/latex', {
 			src: this.state.source,
 			formats: [ 'latex_normal' ]
 		})
 			.then((res) => {
-				console.log(res);
-				if (res.data.latex_normal === '') {
-				}
+				// Updates my backend server with the result and the source of the image
 				axios
 					.post('https://frozen-reaches-96529.herokuapp.com/stemnotes', {
 						latex: res.data.latex_normal,
@@ -34,72 +33,74 @@ class CanvasDrawExample extends Component {
 						console.log(res);
 					})
 					.catch((e) => console.log(e.message));
-				this.props.updateEquation(res.data.latex_normal);
+				// This is where the latex is added to the notes
+				this.props.addEquation(res.data.latex_normal, this.state.source);
 			})
 			.catch((e) => console.log(e));
 	};
 
-	decreaseBrushSize = () => {
-		if (this.state.brushRadius > 10) {
-			this.setState({ brushRadius: this.state.brushRadius - 10 });
-		} else if (this.state.brushRadius > 1) {
-			this.setState({ brushRadius: this.state.brushRadius - 1 });
-		} else if (this.state.brushRadius == 0.25) {
-			return;
-		} else {
-			this.setState({ brushRadius: this.state.brushRadius - 0.25 });
-		}
-	};
-	increaseBrushSizeBrushSize = () => {
-		if (this.state.brushRadius < 1) {
-			this.setState({ brushRadius: this.state.brushRadius + 0.25 });
-		} else if (this.state.brushRadius == 10) {
-			return;
-		} else {
-			this.setState({ brushRadius: this.state.brushRadius + 1 });
-		}
-	};
 	onChangeCanvas = () => {
 		// console.log(this.saveableCanvas.getSaveData());
 		if (this.saveableCanvas)
 			this.setState({ source: this.saveableCanvas.canvasContainer.children[1].toDataURL('image/png') });
 	};
-	renderImage() {
-		if (this.state.source) {
-			return <img src={this.state.source} />;
-		} else {
-			return <div>Click on a color</div>;
-		}
-	}
-	render() {
-		return (
-			<div>
-				<div className="cnv-tools">
-					<div className="cnv-cp_con">
-						{colors.map((x) => {
-							return (
-								<div
-									key={x}
-									className="cnv-cp_color"
-									style={{ backgroundColor: x }}
-									onClick={() => {
-										this.setState({ color: x });
-									}}
-								/>
-							);
-						})}
+	render = () => {
+		let renderColorPad = () => {
+			return (
+				<div className="cnv-cp_con">
+					{colors.map((x) => {
+						return (
+							<div
+								key={x}
+								className="cnv-cp_color"
+								style={{ backgroundColor: x }}
+								onClick={() => {
+									this.setState({ color: x });
+								}}
+							/>
+						);
+					})}
+				</div>
+			);
+		};
+		let renderBrushSizePanel = () => {
+			let decreaseBrushSize = () => {
+				if (this.state.brushRadius > 10) {
+					this.setState({ brushRadius: this.state.brushRadius - 10 });
+				} else if (this.state.brushRadius > 1) {
+					this.setState({ brushRadius: this.state.brushRadius - 1 });
+				} else if (this.state.brushRadius === 0.25) {
+					return;
+				} else {
+					this.setState({ brushRadius: this.state.brushRadius - 0.25 });
+				}
+			};
+			let increaseBrushSizeBrushSize = () => {
+				if (this.state.brushRadius < 1) {
+					this.setState({ brushRadius: this.state.brushRadius + 0.25 });
+				} else if (this.state.brushRadius === 10) {
+					return;
+				} else {
+					this.setState({ brushRadius: this.state.brushRadius + 1 });
+				}
+			};
+			return (
+				<div className="cnv-bs_con">
+					<div className="mini green ui button" onClick={decreaseBrushSize}>
+						{'<'}
 					</div>
-					<div className="cnv-bs_con">
-						<div className="mini green ui button" onClick={this.decreaseBrushSize}>
-							{' < '}
-						</div>
-						<div className="ui blue label">{this.state.brushRadius}</div>
-						<div className="mini green ui button" onClick={this.increaseBrushSizeBrushSize}>
-							>
-						</div>
+					<div className="ui green basic label" style={{ marginRight: '6px' }}>
+						{this.state.brushRadius}
+					</div>
+					<div className="mini green ui button" onClick={increaseBrushSizeBrushSize}>
+						{'>'}
 					</div>
 				</div>
-				<div className="cnv-con" style={{ display: 'flex', width: this.state.width }}>
+			);
+		};
+		let renderCanvasFunctions = () => {
+			return (
+				<div className="cnv-con">
 					<button
 						className="mini green ui button"
 						onClick={() => {
@@ -108,6 +109,9 @@ class CanvasDrawExample extends Component {
 						}}
 					>
 						Clear
+					</button>
+					<button onClick={this.updateMath} className="mini green ui basic button">
+						Update
 					</button>
 					<button
 						className="mini green  ui button"
@@ -118,10 +122,11 @@ class CanvasDrawExample extends Component {
 					>
 						Undo
 					</button>
-					<button onClick={this.UpdateMath} className="mini green ui button">
-						Update
-					</button>
 				</div>
+			);
+		};
+		let renderCanvas = () => {
+			return (
 				<CanvasDraw
 					onChange={this.onChangeCanvas}
 					lazyRadius={0}
@@ -133,12 +138,19 @@ class CanvasDrawExample extends Component {
 					brushRadius={this.state.brushRadius}
 					saveData={JSON.stringify(initialFrame)}
 				/>
+			);
+		};
+		return (
+			<div>
+				<div className="cnv-tools">
+					{renderColorPad()}
+					{renderBrushSizePanel()}
+				</div>
+				{renderCanvasFunctions()}
+				{renderCanvas()}
 				The canvas can be a little buggy, but as soon as your first stroke works, everythings works well!
-				<br />
-				Look at the demo if want to see my use it
-				<br />
 			</div>
 		);
-	}
+	};
 }
 export default CanvasDrawExample;
