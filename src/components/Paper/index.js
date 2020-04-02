@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import TeX from '@matejmazur/react-katex';
-// import PDFToImage from './tools/convertPdfToImage';
 import 'katex/dist/katex.min.css';
 export default class RenderItems extends Component {
 	constructor(props) {

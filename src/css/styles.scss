@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Arimo:700&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
 @import 'mixin';
 
 * {
@@ -12,16 +11,17 @@ body {
 	background-color: #f5f5f5;
 	overflow: hidden;
 }
-
+.body {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: row;
+}
 .page {
-	width: 40vw;
-	position: fixed;
+	flex: 1;
 	padding: 3em;
-	left: 5vw;
-	top: 10vh;
+	height: 100%;
 	background-color: white;
-	max-height: 85vh;
-	min-height: 85vh;
 	overflow-y: scroll;
 	&::-webkit-scrollbar {
 		width: 5px;
@@ -43,10 +43,9 @@ $headerFontSize: 45px;
 	}
 }
 .dashboard {
-	position: fixed;
-	right: 5vw;
-	bottom: 5vh;
+	flex: 1;
 	font-size: 10px;
+	height: 100%;
 	&-header {
 		display: flex;
 		flex-direction: row;
@@ -70,13 +69,13 @@ $headerFontSize: 45px;
 		flex-direction: column;
 
 		&_sec {
-			flex: 1;
 			margin: 1em;
+			height: fit-content;
 			min-height: 150px;
 			box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.05);
 			background-color: white;
 		}
-		height: 85vh;
+		// height: 85vh;
 		width: 47.5vw;
 	}
 }
@@ -99,10 +98,46 @@ $headerFontSize: 45px;
 .reader {
 	&-con {
 		font-size: 1em;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		&:hover {
+			& > .reader {
+				&-edit {
+					opacity: 1;
+					right: 0;
+				}
+				&-delete {
+					opacity: 1;
+					left: 0;
+				}
+			}
+		}
+	}
+	&-body {
+		flex: 1;
+		height: fit-content;
+		justify-content: center;
+		align-items: center;
+		display: flex;
+		transition: opacity .7s;
+	}
+	&-edit {
+		opacity: 0;
+		position: relative;
+		right: 5px;
+		display: flex;
+	}
+	&-delete {
+		opacity: 0;
+		position: relative;
+		left: 5px;
+		transition: opacity .7s;
 	}
 }
 .last-added {
 	padding: 2em;
+	height: fit-content;
 	padding-bottom: 3em;
 	font-size: 15px;
 	line-height: 125%;
@@ -135,6 +170,78 @@ h6 {
 	font-size: 10px !important;
 	margin-bottom: 10px;
 }
-.mathxd {
-	font-size: 17px !important;
+
+.db {
+	&-canvas {
+		&_con {
+			padding: 10px;
+			height: 90vh;
+			box-sizing: border-box;
+			margin: 10px;
+			width: 100%;
+			background-color: #eee;
+		}
+	}
+}
+.cnv {
+	&-tools {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	&-con {
+		width: 100%;
+		height: 100%;
+
+		background-color: red($color: #000000);
+		margin-bottom: 5px;
+	}
+	&-button {
+		width: 50px;
+		text-align: center;
+	}
+	&-core {
+	}
+	&-cp {
+		&_con {
+			display: flex;
+			flex-direction: row;
+			width: fit-content;
+		}
+		&_color {
+			height: 20px;
+			width: 20px;
+			border: 1px solid black;
+		}
+	}
+
+	&-bs {
+		&_son {
+			font-size: 15px;
+			margin-right: 5px;
+			color: white;
+			background-color: black;
+			padding: 3px;
+		}
+		&_con {
+			display: flex;
+			flex-direction: row;
+			& > div {
+				&:first-child {
+					margin-right: 3px;
+				}
+			}
+		}
+	}
+}
+.bucket {
+	&-con {
+		padding: 20px;
+	}
+	&-title {
+		font-size: 15px;
+	}
+	&-input {
+		margin-top: 5px;
+	}
 }
