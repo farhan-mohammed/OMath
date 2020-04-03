@@ -76,7 +76,7 @@ Currently, Math to LaTeX conversion is done using an API, I could create somethi
  
 ### Drawing Path
 
-Currently, I'm using a `react-canvas-draw` canvas to allow the user to draw notes on the browser. I've done some research, I found a library called `MyScript` which is similar to the core of my project and they have the perfected drawing pad with LaTeX conversion capabilities. I could use their API for a drawing pad or I could build my own for a scratch if time permits.
+Currently, I'm using a `react-canvas-draw` canvas to allow the user to draw notes on the browser. I've done some research and I've found a library called MyScript, which is similar to the core of my project but with perfected drawing pad with LaTeX conversion capabilities. I could use their API for a drawing pad or I could build my own for a scratch if time permits.
  
 ### Notes Organization
 
