@@ -1,6 +1,6 @@
 # OMath
 
-<src img="https://imgur.com/Vcvitoc.png">
+<img src="https://imgur.com/Vcvitoc.png">
 
 Demo Available at either:
 1. https://OMath.site/
