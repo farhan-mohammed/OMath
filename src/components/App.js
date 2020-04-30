@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Paper from './Paper';
 import DashBoard from './Dasboard';
+import axios from 'axios';
 import '../css/styles.css';
 export default class App extends Component {
 	constructor(props) {

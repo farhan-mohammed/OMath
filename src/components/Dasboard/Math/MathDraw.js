@@ -18,6 +18,7 @@ class CanvasDrawExample extends Component {
 	};
 	updateMath = () => {
 		// Creates an API call to MathPix API to convert the canvas api to LaTeX
+		console.log(this.state.source);
 		MathAPI.post('/latex', {
 			src: this.state.source,
 			formats: [ 'latex_normal' ]
