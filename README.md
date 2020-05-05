@@ -39,7 +39,7 @@ There were many features that we had accomplished, such as being able to convert
  
 It's March 2020, there's a pandemic going on, every school is suddenly shut down, and everything is now online. Professors are teaching on Zoom and other video calling applications on a 1-week notice without much help from anyone. I noticed professors who do not own a writing tablet are using a pdf-viewer and annotating on it as a way to teach on their devices. This is not the optimal solution, so I revamped STEM Notes to solve this problem.
  
-There is where OMath was created. 
+This is where OMath was created. 
  
 OMath was designed to be used in a screen share type of lecture, where the professor can upload pictures of their questions, add notes and then attempt to solve it using a drawing pad. I wanted this process to be as seamless as possible, so I added features such as uploading images and text, and being able to edit LaTeX on screen. I removed several features from the original application and made it a sole web application. 
  
