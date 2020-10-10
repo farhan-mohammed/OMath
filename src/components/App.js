@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Paper from './Paper';
 import DashBoard from './Dasboard';
-import axios from 'axios';
+import Gluejar from 'react-gluejar';
 import '../css/styles.css';
+import axios from 'axios';
+import MathAPI from './apis/Math';
+
 export default class App extends Component {
 	constructor(props) {
 		super(props);
@@ -14,8 +17,26 @@ export default class App extends Component {
 				{ index: 1, type: 'text', value: '# Welcome to OMath' },
 				{ index: 2, type: 'text', value: '## Please Enter an equation' },
 				{ index: 0, type: 'math', value: '[ x^n + y^n = z^n ]' }
-			]
+			],
+			cp: []
 		};
+	}
+	getBase64Image(imgUrl, callback) {
+		var img = new Image();
+		img.onload = function() {
+			var canvas = document.createElement('canvas');
+			canvas.width = img.width;
+			canvas.height = img.height;
+			var ctx = canvas.getContext('2d');
+			ctx.drawImage(img, 0, 0);
+			var dataURL = canvas.toDataURL('image/png');
+
+			callback(dataURL); // the base64 string
+		};
+
+		// set attributes and src
+		img.setAttribute('crossOrigin', 'anonymous'); //
+		img.src = imgUrl;
 	}
 	/**
 	 * addEquation
@@ -78,6 +99,32 @@ export default class App extends Component {
 		arr.pop(x);
 		this.setState({ eqns: arr });
 	};
+
+	updateMath = async (src) => {
+		if (!src) {
+			return;
+		}
+		console.log('mathpix', src);
+		MathAPI.post('/latex', {
+			src,
+			formats: [ 'latex_normal' ]
+		})
+			.then((res) => {
+				// Updates my backend server with the result and the source of the image
+				axios
+					.post('https://frozen-reaches-96529.herokuapp.com/stemnotes', {
+						latex: res.data.latex_normal,
+						src
+					})
+					.then(() => {
+						console.log(res);
+					})
+					.catch((e) => console.log(e.message));
+				// This is where the latex is added to the notes
+				this.addEquation(res.data.latex_normal, src);
+			})
+			.catch((e) => console.log(e));
+	};
 	render() {
 		// The Paper is the component that renders the list of saved notes on screen, therefore it should have access to the list of notes and power to update and delete notes
 		const paperProps = {
@@ -89,10 +136,22 @@ export default class App extends Component {
 		const dashboardProps = {
 			addEquation: this.addEquation,
 			addImage: this.addImage,
-			addText: this.addText
+			addText: this.addText,
+			getBase64Image: this.getBase64Image
 		};
 		return (
 			<div className="body">
+				<Gluejar
+					onPaste={(files) => {
+						if (files !== this.state.cp) {
+							this.getBase64Image(files[files.length - 1], this.updateMath);
+							this.setState({ cp: files });
+						}
+					}}
+					errorHandler={(err) => console.error(err)}
+				>
+					{() => ''}
+				</Gluejar>
 				<div className="page">
 					<Paper {...paperProps} />
 				</div>
