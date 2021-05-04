@@ -3,7 +3,7 @@
 <img src="https://imgur.com/Vcvitoc.png">
 
 Demo Available at either:
-1. https://OMath.site/
+1. https://omath.farhan.site/
 2. https://farhan-mohammed.github.io/OMath/
  
 PS: All the files in `/src` are documented
