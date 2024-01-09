@@ -1,3 +1,6 @@
+# Jan 8 2023
+- I shut down the backend that supports this project which is why the API request will fail. The frontend is deployed and working.
+
 # OMath
 
 <img src="https://imgur.com/Vcvitoc.png">
